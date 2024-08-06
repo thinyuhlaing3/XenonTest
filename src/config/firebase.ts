@@ -12,8 +12,8 @@ const firebaseConfig = {
   projectId: "xenon-9f492",
   storageBucket: "xenon-9f492.appspot.com",
   messagingSenderId: "593204269431",
-  appId: "1:593204269431:web:4ec7de56b9a8a67f401172",
-  measurementId: "G-DPHL2MQ0K7"
+  appId: "1:593204269431:web:8c07905e87c861f4401172",
+  measurementId: "G-5B5V0QW756"
 };
 
 // Initialize Firebase
