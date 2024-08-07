@@ -10,7 +10,6 @@ export default function GetCode() {
         });
         return unsubscribe;
       }, []);
-if (!unsubscribe) return null;
 
 
     return(
