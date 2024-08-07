@@ -1,38 +1,138 @@
-.App {
+
+
+.dataGrid{
+      width: fit-content;
+      height: fit-content;
+     margin: 20px;
+}
+
+.container-admin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+/* CSS File */
+
+.signIn_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #e2e8f0; /* bg-slate-200 */
+}
+
+.signIn_card {
+    width: 100%;
+    margin: 0 1.25rem; /* mx-5 */
+    max-width: 20rem; 
+    height: 25rem;
+    background-color: #ffffff;
+    border-radius: 1rem; /* rounded-xl */
+    padding: 2rem 2rem; /* px-8 py-16 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.button{
+
+  background-color: #add8e6;
+  width: 100%;
+  color: black;
+  background-color: #f8f9fa;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 0.75rem;
+cursor: pointer;
+
+}
+.get-code-button{
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin: 10px;
+background-color: black;
+color:#ffffff;
+cursor: pointer;
+
+}
+
+.text-field{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.text-light-text {
+    /* Add any specific text styles if needed */
+    
+}
+.header{
+  font-size: 1.5rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.w-full {
+    width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.mt-6 {
+    margin-top: 1.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.bg-light-createB {
+    background-color: #add8e6; /* Example color for bg-light-createB */
+}
+
+.bg-light {
+     /* Example color for bg-light */
+}
+
+.text-black {
+    color: black;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.rounded-2xl {
+    
+}
+
+.p-3 {
+    
+}
+
+.framer-72eKe .framer-1n6gpwe {
+  align-content: center;
   align-items: center;
+  background-color: #222;
+  border-radius: 8px;
+  box-shadow: 0 .7065919983928324px .7065919983928324px -.625px #00000026, 0 1.8065619053231785px 1.8065619053231785px -1.25px #00000025, 0 3.6217592146567767px 3.6217592146567767px -1.875px #00000023, 0 6.8655999097303715px 6.8655999097303715px -2.5px #00000020, 0 13.646761411524492px 13.646761411524492px -3.125px #0000001b, 0 30px 30px -3.75px #0000000d;
+  display: flex;
+  flex: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  height: 40px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  overflow: visible;
+  padding: 15px;
+  position: relative;
+  width: min-content;
 }
