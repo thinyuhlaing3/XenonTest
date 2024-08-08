@@ -2,9 +2,13 @@ import { Box, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginUser } from "../type/user";
+import { FirebaseError } from 'firebase/app'; // Make sure you import FirebaseError if necessary
+
 import {
   createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
@@ -26,18 +30,30 @@ const SignUp = async() => {
   }
 }  
 
-useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    console.log("currentuser",user?.email);
-  });
-  return unsubscribe;
-}, [user]);
+
 
 const logOut = async () => {
     await signOut(auth);
     
 };
-console.log("users", user)
+const signInOrSignUp =  async()  =>{
+  if (user.email && user.password.length >= 6) {
+    // Email not registered, create a new account
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, user.email, user.password);
+      console.log("Account created successfully:", userCredential.user);
+    } catch (error  ) {
+      if (error instanceof FirebaseError && error.code === 'auth/email-already-in-use') {
+        
+        console.log("Unexpected: Email already in use, attempting to sign in instead.");
+        const userCredential = await signInWithEmailAndPassword(auth, user.email, user.password);
+        console.log("Signed in successfully:", userCredential.user);
+      } 
+    }
+  } 
+}
+
+console.log("users", auth.currentUser?.email)
     return(
     <Box className="signIn_container">
       <Box className=" signIn_card">
@@ -80,7 +96,7 @@ console.log("users", user)
           <button
             className="button"
             // onClick={() => navigate("/get-code")}
-          onClick={SignUp}
+          onClick={signInOrSignUp}
           >
            register
           </button>

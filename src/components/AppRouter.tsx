@@ -9,9 +9,9 @@ export default function AppRouter(){
         <BrowserRouter>
     <Routes>
       <Route path="/camping" element={<CampingPage />} />
-      <Route path="/register" element={<RegisterForm />} /> {/* BC/register */} {/* get token */}
+      <Route path="/:key/register" element={<RegisterForm />} /> {/* BC/register */} {/* get token */}
       <Route path="/get-code/" element={<GetCode />} /> {/* need token */} {/* click and generate code*/}
-      <Route path="/camping/admin/login" element={<AdminLoginFrom />} /> {/* need token */} {/* click and generate code*/}
+      <Route path="/camping/admin/login" element={<AdminLoginFrom />} /> 
       <Route path="/camping/admin" element={<AdminPage />} /> {/* need token */} {/* click and generate code*/}
     </Routes>
   </BrowserRouter>
