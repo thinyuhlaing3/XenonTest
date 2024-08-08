@@ -4,9 +4,11 @@ import { Box, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { config } from "../config";
 
 export default function AdminLoginFrom(){
     const navigate  = useNavigate();
+    const baseUrl = config.baseUrl;
 
     const [user, setUser] = useState<LoginUser>({
         email:"",
@@ -16,7 +18,7 @@ export default function AdminLoginFrom(){
         if (user.email && user.password.length >= 6) {
             await signInWithEmailAndPassword(auth, user.email, user.password)
           console.log("user login successfully!")
-          navigate("/camping/admin");
+          return navigate(`/${baseUrl}/camping/admin`)
         }else {
           console.log("user required")
       console.log("auth", auth)
@@ -25,54 +27,20 @@ export default function AdminLoginFrom(){
       }  
     return(
 
-        <Box className="signIn_container">
-        <Box className=" signIn_card">
-          <Typography variant="h5" className="text-light-text text-center">
-             Register
-          </Typography>
-          <TextField
-            required
-            id="outlined-basic"
-            label="Name"
-            variant="outlined"
-            className="text-field"
-            type="name"
-            size="small"
-            
-          />
-          <TextField
-            required
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            className="text-field"
-            type="email"
-            size="small"
-            onChange={(e) => setUser({...user, email:e.target.value})}
-  
-          />
-          <TextField
-            required
-            id="outlined-basic"
-            label="Password"
-            placeholder="please type at least 6 characters"
-            variant="outlined"
-            className="text-field"
-            type="password"
-            size="small"
-            onChange={(e) => setUser({...user, password:e.target.value})}
-          />
-          <Box className="gap-2 flex flex-col">
-            <button
-              className="button"
-              // onClick={() => navigate("/get-code")}
-            onClick={Login}
-            >
-             Login
-            </button>
-          </Box>
+      <div className="register-container">
+      <div className="register-form">
+        <h1>Register</h1>
       
-        </Box>
-      </Box>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" placeholder="jane@framer.com" onChange={(e) => setUser({...user, email:e.target.value})}/>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" placeholder="please type at least 6 characters" onChange={(e) => setUser({...user, password:e.target.value})}/>
+        </div>
+        <button className="submit" onClick={Login}>Login</button>
+      </div>
+    </div>
     )
 }

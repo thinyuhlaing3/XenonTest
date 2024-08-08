@@ -1,8 +1,8 @@
 interface Config {
-    apiBaseUrl: string;
+    baseUrl: string;
 }
 
 export const config: Config = {
-    apiBaseUrl: process.env.REACT_APP_API_BASE_URL || ""
+    baseUrl:  "xenonmm"
 };
-// "http://localhost:3000"
+// "xenonmm"
