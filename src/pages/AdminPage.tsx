@@ -28,7 +28,7 @@ export default function AdminPage() {
             id: doc.id,
             ...doc.data()
           }));
-          setUsers(usersList);
+          return setUsers(usersList);
           console.log("camp users", usersList)
         } else {
           // User is signed out

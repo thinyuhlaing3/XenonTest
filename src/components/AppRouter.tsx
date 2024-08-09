@@ -16,7 +16,7 @@ export default function AppRouter(){
       <Route path={`${baseUrl}/`} element={<App />} />
       <Route path={`${baseUrl}/camping`} element={<CampingPage />} />
       <Route path={`${baseUrl}/:key/register`} element={<RegisterForm />} /> {/* BC/register */} {/* get token */}
-      <Route path={`${baseUrl}/get-code`} element={<GetCode />} /> {/* need token */} {/* click and generate code*/}
+      <Route path={`${baseUrl}/:key/get-code`} element={<GetCode />} /> {/* need token */} {/* click and generate code*/}
       <Route path={`${baseUrl}/camping/admin/login`} element={<AdminLoginFrom />} /> 
       <Route path={`${baseUrl}/camping/admin`} element={<AdminPage />} /> {/* need token */} {/* click and generate code*/}
     </Routes>

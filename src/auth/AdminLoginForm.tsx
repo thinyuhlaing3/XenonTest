@@ -29,15 +29,32 @@ export default function AdminLoginFrom(){
 
       <div className="register-container">
       <div className="register-form">
-        <h1>Register</h1>
+        <h1>Login</h1>
       
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="jane@framer.com" onChange={(e) => setUser({...user, email:e.target.value})}/>
+          <TextField
+
+type="email"
+          placeholder="jane@framer.com"
+
+          sx={ {width:"100%"}}
+          size="small"
+          className="form-group"
+          onChange={(e) => setUser({...user, email:e.target.value})}
+        />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="please type at least 6 characters" onChange={(e) => setUser({...user, password:e.target.value})}/>
+          <TextField
+
+          placeholder="please type at least 6 characters"
+          type="password"
+          sx={ {width:"100%"}}
+          size="small"
+          className="form-group"
+          onChange={(e) => setUser({...user, password:e.target.value})}
+        />
         </div>
         <button className="submit" onClick={Login}>Login</button>
       </div>

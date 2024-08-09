@@ -2,39 +2,38 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { collection, getDoc, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config/firebase';
-import { UserData } from '../type/user';
+import {  UserData } from '../type/user';
 
 
 interface Props{
-  data:any
+  data:UserData[]
 }
 
 
 export default function DataTable({ data } :Props) {
-
-
+const [rowsData, setRowsData] = useState<any>({...data})
+console.log("data" ,data)
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 20, align:"center", headerAlign:"center",  },
-    { field: 'name', headerName: 'Name', width: 180, },
+    { field: 'username', headerName: 'Name', width: 180, },
     { field: 'email', headerName: 'Email', width: 200 },
     { field: 'code', headerName: 'Code', width: 250 },
   ];
+// const datakey = 
+  // let rows = [{...data, }];
+  const updatedData = data.map(da => {
+    // Extract the third part of the code and concatenate it with the current id
+    const newId = da.code.split("-")[2] +"-"+ da.id;
+    
+    // Return a new object with the updated id
+    return { ...da, id: newId };
+});
+
   
-  let rows = [
-    { id: 1, name: 'Snow', email: 'snow@gmail.com',code:" xenon-fL8jO-BC0001", recieved:"Done" },
-    { id: 2, name: 'Jack', email: 'jack@gmail.com',code: "xenon-LjO3u-BC0002", recieved:"Done" },
-    { id: 3, name: 'GaGa', email: 'gaga@gmail.com',code: "xenon-Uc1V2-PF0001", recieved:"Done" },
-    { id: 4, name: 'PuPu', email: 'pupu@gmail.com',code: "xenon-Uc1V2-PF0001", recieved:"Done" },
-    { id: 5, name: 'Snow', email: 'snow@gmail.com',code: "xenon-Uc1V2-PF0001", recieved:"Done" },
-    { id: 7, name: 'SuSu', email: 'susu@gmail.com',code: "xenon-Uc1V2-PF0001", recieved:"Done" },
-    { id: 8, name: 'PuPu', email: 'pupu@gmail.com',code: "xenon-Uc1V2-PF0001", recieved:"Done" },
-    { id: 9, name: 'Snow', email: 'snow@gmail.com',code:  "xenon-Uc1V2-PF0001", recieved:"Done" },
-   
-  ];
   return (
     <div className="dataGrid">
       <DataGrid
-        rows={data } // Use userData as rows
+        rows={updatedData} // Use userData as rows
         columns={columns}
         initialState={{
           pagination: {

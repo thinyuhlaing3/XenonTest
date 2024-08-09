@@ -1,21 +1,46 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react"
 import { auth, db } from "../config/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { config } from "../config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import Card1 from "../img/Card(1).png";
+import Card2 from "../img/Card(2).png";
+
+import PhotoFrame from "../img/Frame.png";
 export default function GetCode() {
     const [click,setClick] = useState(false)
+   const {key} = useParams();
+   const [bc,setBc] = useState(key == "Bc" ? true : false)
+// const bc = key == "Bc" ? true : false;
     const [userCode, setUserCode] = useState("")
     const baseUrl = config.baseUrl;
   const navigate = useNavigate()
  
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, async(user) => {
         if (user) {
           const currentUser =  user.email  ;
           console.log("currentuser", currentUser)
-          return currentUser;
+          const currentUserEmail = auth.currentUser && auth.currentUser.email
+
+          const usersCollectionRef = collection(db, "user");
+          const userQuery = query(usersCollectionRef, where("email", "==", currentUserEmail));
+          const querySnapshot = await getDocs(userQuery);
+          querySnapshot.forEach((doc) => {
+            const userData = doc.data();
+            const codeOfUser = userData.code;
+            const registerKey = userData.code.split("-")[2] 
+            setBc(registerKey == "BC" ? true : false)
+            console.log(`Found user:`,codeOfUser);
+            setUserCode(codeOfUser)
+            if (registerKey !== key?.toUpperCase()) return alert(`This User is already registered to ${registerKey}`) 
+              // Do something with the user data
+      
+      
+          });
+          
+          
           
           // ...
         } else {
@@ -63,7 +88,6 @@ export default function GetCode() {
     });
 
 }
-getUserCode();
 
    const handleCopy = () => {
     navigator.clipboard.writeText(userCode).then(() => {
@@ -75,12 +99,17 @@ getUserCode();
     return(
       <div className="App">
       <div className="business-card">
-        <div className="image-placeholder">
-          <div className="image">640 X 420</div>
-        </div>
+        {/* <div className="image-placeholder">
+          <div className="image" >640 X 420</div>
+
+        </div> */}
+        <img className="image-placeholder" src={bc ? Card2 :PhotoFrame  }/>
+
         <div className="content">
-          <h2>Business Card</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget pharetra mauris. Vestibulum posuere, nulla quis auctor ullamcorper, nisi lorem gravida sapien, vitae accumsan dui dolor in urna. Suspendisse non leo ipsum.</p>
+        {bc ?  <h2>Business Card</h2> :
+        <h2>Photo Frame</h2>
+        }
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget pharetra mauris. Vestibulum posuere, nulla quis auctor ullamcorper, nisi lorem gravida sapien.</p>
           <div className="buttons">
             <button className="learn-more">Learn More</button>
            {click  ?<> <button className="get-code" >{userCode}</button> <ContentCopyIcon sx={{height:"100%"}} onClick={handleCopy}/></>
