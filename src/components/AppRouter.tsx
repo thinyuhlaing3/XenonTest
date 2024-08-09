@@ -6,13 +6,14 @@ import AdminLoginFrom from "../auth/AdminLoginForm";
 import GetCode from "../pages/GetCode";
 import { config } from "../config";
 import Test from "../test/test";
+import App from "../App";
 export default function AppRouter(){
   const baseUrl = config.baseUrl;
     return(
         <BrowserRouter>
     <Routes>
-    <Route path='/test' element={<Test />} />
-
+      <Route path='/test' element={<Test />} />
+      <Route path={`${baseUrl}/`} element={<App />} />
       <Route path={`${baseUrl}/camping`} element={<CampingPage />} />
       <Route path={`${baseUrl}/:key/register`} element={<RegisterForm />} /> {/* BC/register */} {/* get token */}
       <Route path={`${baseUrl}/get-code`} element={<GetCode />} /> {/* need token */} {/* click and generate code*/}

@@ -95,6 +95,7 @@ async function createAnewUser(key : string) {
   return addUser
 
 }
+
 const register =  async()  =>{
   console.log("click")
   if (user.email && user.password.length >= 6) {
@@ -114,7 +115,9 @@ const register =  async()  =>{
     }
   } 
 }
+useEffect(() => {
 
+})
 console.log("user", user)
 
     return(
